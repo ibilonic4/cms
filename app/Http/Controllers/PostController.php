@@ -7,6 +7,17 @@ use App\Models\Post;
 use App\Models\User;
 class PostController extends Controller
 {
+
+
+
+
+  public function index()
+  {
+
+    $posts = Post::all();
+    return view('admin/posts/index', compact('posts'));
+  }
+
     public function show(Post $post){
 
         return view('blog-post', compact('post'));
@@ -28,8 +39,17 @@ return view('admin/posts/create');
 
     
 
-         if(request('post_image')){ 
-      $inputs['post_image']= request('post_image')->store('images');}
+      //    if(request('post_image')){ 
+      // $inputs['post_image']= request('post_image')->move(public_path('images'));}
+
+      if($request->hasFile('post_image')){
+        $file = $request->file('post_image');
+        $extension = $file->getClientOriginalExtension();
+        $fileName = time() . '.' . $extension;
+        $path = public_path('images');
+        $file->move($path, $fileName);
+        $inputs['post_image'] = $path;
+      }
 
 
     //   Post::create($inputs,[
