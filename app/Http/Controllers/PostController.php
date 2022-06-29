@@ -39,17 +39,17 @@ return view('admin/posts/create');
 
     
 
-      //    if(request('post_image')){ 
-      // $inputs['post_image']= request('post_image')->move(public_path('images'));}
+           if(request('post_image')->getrea){ 
+        $inputs['post_image']= request('post_image')->store('images');}
 
-      if($request->hasFile('post_image')){
-        $file = $request->file('post_image');
-        $extension = $file->getClientOriginalExtension();
-        $fileName = time() . '.' . $extension;
-        $path = public_path('images');
-        $file->move($path, $fileName);
-        $inputs['post_image'] = $path;
-      }
+      //  if($request->hasFile('post_image')){
+      //    $file = $request->file('post_image');
+      //    $extension = $file->getClientOriginalExtension();
+      //    $fileName = time() . '.' . $extension;
+      //    $path = public_path('images');
+      //    $file->move($path, $fileName);
+      //   $inputs['post_image'] = $path;
+      //  }
 
 
     //   Post::create($inputs,[
