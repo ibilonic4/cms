@@ -39,7 +39,7 @@ return view('admin/posts/create');
 
     
 
-           if(request('post_image')->getrea){ 
+           if(request('post_image')){ 
         $inputs['post_image']= request('post_image')->store('images');}
 
       //  if($request->hasFile('post_image')){

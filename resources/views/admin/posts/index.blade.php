@@ -35,7 +35,9 @@
             <tr>
               <td>{{$post->id}}</td>
               <td>{{$post->title}}</td>
-              <td><img src="{{$post->post_image}}" width="150" height="150"></td>
+              <td>
+                <img src="{{asset('storage/'. $post->post_image)}}" width="150" height="150">
+            </td>
               <td>{{$post->created_at->diffForHumans()}}</td>
               <td>{{$post->updated_at->diffForHumans()}}</td>
               
