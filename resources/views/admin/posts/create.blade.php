@@ -3,8 +3,12 @@
 @section('content')
 
 <h1> CREATE </h1>
+@foreach($errors->all() as $error)
+                <p class="into-text">{{ $error}} </p>
+                @endforeach 
+<form action="{{route('post.store')}}" method="post" enctype="multipart/form-data"
 
-<form action="{{route('post.store')}}" method="post">
+>
 
     @csrf
 

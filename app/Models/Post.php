@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-
+        
+    protected $table ='posts';
     protected $guarded = [
 //prazan je tako da kao da sam stavio $fillable
     ];
