@@ -73,4 +73,33 @@ return view('admin/posts/create');
   return back();
 
  }
+
+
+ public function edit(Post $post){
+  
+  return view('admin/posts/edit', compact('post'));
+ }
+
+ public function update (Post $post){
+
+  $inputs = request()->validate([
+    'title'=> 'required|min:8|max:225',
+    'post_image' => 'file',
+    'body' => 'required'
+ ]);
+
+    if(request('post_image')){ 
+  $inputs['post_image']= request('post_image')->store('images');
+$post->post_image = $inputs['post_image'];}
+
+$post->title = $inputs['title'];
+$post->body = $inputs['body'];
+
+  auth()->user()->posts()->save($post);
+
+   
+  Session::flash('updated-message', 'new post was updated');
+
+  return redirect()->route('post.index');
+ }
 }

@@ -12,6 +12,11 @@
 <div class="alert alert-success">{{Session::get('created-message')}} </div>
 
 @endif
+@if(Session::has('updated-message'))
+
+<div class="alert alert-success">{{Session::get('updated-message')}} </div>
+
+@endif
  <!-- DataTales Example -->
  <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -45,7 +50,9 @@
             @foreach($posts as $post)
             <tr>
               <td>{{$post->id}}</td>
-              <td>{{$post->title}}</td>
+              <td>
+                <a href="{{route('post.edit', $post->id)}}">{{$post->title}}</a>
+              </td>
               <td>
                 <img src="{{asset($post->getPostImageAttribute($post->post_image))}}" width="150" height="150">
             </td>
