@@ -14,8 +14,10 @@ class PostController extends Controller
 
   public function index()
   {
+       //svi postovi logiranog usera
 
-    $posts = Post::all();
+     $posts = auth()->user()->posts;
+
     return view('admin/posts/index', compact('posts'));
   }
 
@@ -83,7 +85,7 @@ return view('admin/posts/create');
  }
 
 
- 
+
  public function update (Post $post){
 
   $inputs = request()->validate([
