@@ -27,7 +27,7 @@
                 <th>Image</th>
                 <th>Created at</th>
                 <th>Updated at</th>
-        
+                <th>Owner</th>
             </tr>
           </tfoot>
           <tbody>
@@ -36,11 +36,11 @@
               <td>{{$post->id}}</td>
               <td>{{$post->title}}</td>
               <td>
-                <img src="{{asset('storage/'. $post->post_image)}}" width="150" height="150">
+                <img src="{{asset($post->getPostImageAttribute($post->post_image))}}" width="150" height="150">
             </td>
               <td>{{$post->created_at->diffForHumans()}}</td>
               <td>{{$post->updated_at->diffForHumans()}}</td>
-              
+              <td>{{$post->user->name}}</td>
             </tr>
             @endforeach
           </tbody>
