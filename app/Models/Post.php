@@ -23,12 +23,13 @@ class Post extends Model
         if (strpos($value, 'https://') !== FALSE || strpos($value, 'http://') !== FALSE) {
             return $value;
         }
+     
         return asset('storage/' . $value);
         }
 
-public function setPostImageAttribute($value){
+// public function setPostImageAttribute($value){
 
-    $this->attributes['post_image']= asset($value);
-}
+//     $this->attributes['post_image']= asset($value);
+// }
         
 }

@@ -57,8 +57,10 @@ return view('admin/posts/create');
     //     'user_id' => auth()->id()
     // ]);
       auth()->user()->posts()->create($inputs);
+      
+      Session::flash('created-message', 'new post was created');
 
-      return back();
+      return redirect()->route('post.index');
       
  }
 

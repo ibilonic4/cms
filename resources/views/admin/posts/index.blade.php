@@ -7,7 +7,11 @@
 <div class="alert alert-danger">{{Session::get('message')}} </div>
 
 @endif
+@if(Session::has('created-message'))
 
+<div class="alert alert-success">{{Session::get('created-message')}} </div>
+
+@endif
  <!-- DataTales Example -->
  <div class="card shadow mb-4">
     <div class="card-header py-3">
