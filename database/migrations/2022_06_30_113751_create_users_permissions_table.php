@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('set null');
-            $table->string('title');
-            $table->text('post_image')->nullable();
-            $table->text('body');
+        Schema::create('permission_user', function (Blueprint $table) {
+            $table->primary(['user_id', 'permission_id']); //osigurava unikatnost svakog zapisa u pivot tablici
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('permission_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+
+            
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('permission_user');
     }
 };

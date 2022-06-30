@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('set null');
-            $table->string('title');
-            $table->text('post_image')->nullable();
-            $table->text('body');
+            $table->string('name')->unique(); //ime koje je razumljivo useru npr. "Administrator"
+            $table->string('slug')->unique(); //ime koje se koristi za programiranje npr. "admin"
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('roles');
     }
 };
