@@ -18,7 +18,7 @@ class PostController extends Controller
   {
        //svi postovi logiranog usera
 
-     $posts = auth()->user()->posts()->paginate(1);
+     $posts = auth()->user()->posts()->paginate(5);
      
 
 
