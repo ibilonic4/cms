@@ -2,6 +2,12 @@
 @section('content')
 <h1>all posts </h1>
 
+@if(Session::has('message'))
+
+<div class="alert alert-danger">{{Session::get('message')}} </div>
+
+@endif
+
  <!-- DataTales Example -->
  <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -28,6 +34,7 @@
                 <th>Created at</th>
                 <th>Updated at</th>
                 <th>Owner</th>
+                <th>Delete</th>
             </tr>
           </tfoot>
           <tbody>
@@ -41,6 +48,13 @@
               <td>{{$post->created_at->diffForHumans()}}</td>
               <td>{{$post->updated_at->diffForHumans()}}</td>
               <td>{{$post->user->name}}</td>
+              <td>
+           <form method="post" action="{{route('post.destroy', $post->id)}}" enctype="multipart/form-data">
+            @csrf
+            @method('DELETE')
+            <button type = "submit" class="btn btn-danger">Delete</button>
+           </form>
+              </td>
             </tr>
             @endforeach
           </tbody>
