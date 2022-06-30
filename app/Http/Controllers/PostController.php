@@ -56,6 +56,8 @@ return view('admin/posts/create');
     //   Post::create($inputs,[
     //     'user_id' => auth()->id()
     // ]);
+
+    //ovo binda logiranog usera za post koji je napravio, pri updateu se to ne koristi jer bi promjenilo kreatora
       auth()->user()->posts()->create($inputs);
       
       Session::flash('created-message', 'new post was created');
@@ -80,6 +82,8 @@ return view('admin/posts/create');
   return view('admin/posts/edit', compact('post'));
  }
 
+
+ 
  public function update (Post $post){
 
   $inputs = request()->validate([
@@ -90,12 +94,12 @@ return view('admin/posts/create');
 
     if(request('post_image')){ 
   $inputs['post_image']= request('post_image')->store('images');
-$post->post_image = $inputs['post_image'];}
+  $post->post_image = $inputs['post_image'];}
 
 $post->title = $inputs['title'];
 $post->body = $inputs['body'];
 
-  auth()->user()->posts()->save($post);
+  $post->save();
 
    
   Session::flash('updated-message', 'new post was updated');
