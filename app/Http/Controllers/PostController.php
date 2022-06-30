@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
 class PostController extends Controller
 {
 
@@ -16,7 +18,9 @@ class PostController extends Controller
   {
        //svi postovi logiranog usera
 
-     $posts = auth()->user()->posts;
+     $posts = auth()->user()->posts()->paginate(1);
+     
+
 
     return view('admin/posts/index', compact('posts'));
   }
@@ -27,11 +31,16 @@ class PostController extends Controller
     }
 
  public function create(){
+
+  $this->authorize('create',Post::class);
+
 return view('admin/posts/create');
 
  }
 
  public function store(Request $request){
+
+  $this->authorize('create',Post::class);
 
      $inputs = $request->validate([
              'title'=> 'required|min:8|max:225',
@@ -70,6 +79,8 @@ return view('admin/posts/create');
 
  public function destroy(Post $post){
 
+
+  $this->authorize('delete',$post);
   $post->delete();
 
   Session::flash('message', 'Post was deleted');
@@ -81,6 +92,9 @@ return view('admin/posts/create');
 
  public function edit(Post $post){
   
+   $this->authorize('view',$post);
+
+ 
   return view('admin/posts/edit', compact('post'));
  }
 
@@ -100,6 +114,10 @@ return view('admin/posts/create');
 
 $post->title = $inputs['title'];
 $post->body = $inputs['body'];
+
+//gleda udate metodu u PostPolicy.php
+     $this->authorize('update',$post);
+
 
   $post->save();
 
