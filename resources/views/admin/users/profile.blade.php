@@ -12,7 +12,8 @@
     @csrf
     @method('PATCH')
     <div class="mb-4">
-        <img class="img-profile rounded-circle" src="{{asset($user->getUserImageAttribute($user->avatar))}}" height="150" width="150">
+        <img class="img-profile rounded-circle" onerror="this.style.display='none'"
+        src="{{asset($user->getUserImageAttribute($user->avatar))}}" height="150" width="150">
     </div>
     <div class="form-group">
         

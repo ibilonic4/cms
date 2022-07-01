@@ -2,9 +2,9 @@
 @section('content')
 <h1>all users </h1>
 
-@if(Session::has('message'))
+@if(Session::has('user-deleted'))
 
-<div class="alert alert-danger">{{Session::get('message')}} </div>
+<div class="alert alert-danger">{{Session::get('user-deleted')}} </div>
 
 @endif
 @if(Session::has('created-message'))
@@ -52,6 +52,8 @@
           </tfoot>
           <tbody>
             @foreach($users as $user)
+            {{--  osigurava da ne vidim samog sebe na popisu --}}
+            @if($user != auth()->user())
             <tr>
               <td>{{$user->id}}</td>
               <td>
@@ -60,14 +62,14 @@
               <td>{{$user->name}}</td>
               <td>{{$user->email}}</td>
               <td>
-                <img src="{{asset($user->getUserImageAttribute($user->avatar))}}" width="150" height="150">
+                <img src="{{asset($user->getUserImageAttribute($user->avatar))}}"onerror="this.style.display='none'" width="150" height="150">
             </td>
               <td>{{$user->created_at->diffForHumans()}}</td>
               <td>{{$user->updated_at->diffForHumans()}}</td>
              
               <td>
 
-           <form method="post" action="" enctype="multipart/form-data">
+           <form method="post" action="{{route('user.destroy', $user)}}" enctype="multipart/form-data">
             @csrf
             @method('DELETE')
             <button type = "submit" class="btn btn-danger">Delete</button>
@@ -76,6 +78,7 @@
        
               </td>
             </tr>
+            @endif
             @endforeach
           </tbody>
         </table>

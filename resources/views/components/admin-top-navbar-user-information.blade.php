@@ -6,7 +6,7 @@
              {{auth()->user()->name}}
         @endif
       </span>
-      <img class="img-profile rounded-circle" src="{{asset(auth()->user()->getUserImageAttribute(auth()->user()->avatar))}}">
+      <img class="img-profile rounded-circle" src="{{asset(auth()->user()->getUserImageAttribute(auth()->user()->avatar))}}"onerror="this.style.display='none'">
     </a>
     <!-- Dropdown - User Information -->
     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
