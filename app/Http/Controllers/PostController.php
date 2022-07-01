@@ -115,7 +115,7 @@ return view('admin/posts/create');
 $post->title = $inputs['title'];
 $post->body = $inputs['body'];
 
-//gleda udate metodu u PostPolicy.php
+//gleda update metodu u PostPolicy.php
      $this->authorize('update',$post);
 
 
