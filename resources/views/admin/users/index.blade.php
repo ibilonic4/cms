@@ -57,7 +57,7 @@
             <tr>
               <td>{{$user->id}}</td>
               <td>
-                <a href="">{{$user->username}}</a>
+                <a href="{{route('user.profile.show', $user)}}">{{$user->username}}</a>
               </td>
               <td>{{$user->name}}</td>
               <td>{{$user->email}}</td>

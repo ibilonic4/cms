@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 
 class UserController extends Controller
 {
@@ -17,14 +18,14 @@ class UserController extends Controller
 
 
     public function show(User $user){
-
-        return view('admin/users/profile', compact('user'));
+ $roles= Role::all();
+        return view('admin/users/profile', compact('user','roles'));
     }
 
     public function update(User $user){
 
         $inputs = request()->validate([
-            'username' => ['required', 'string', 'max:255','unique:users','alpha_dash'],
+           // 'username' => ['required', 'string', 'max:255','unique:users','alpha_dash'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
           //  'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -46,6 +47,23 @@ class UserController extends Controller
         $user->delete();
 
         session()->flash('user-deleted', 'User has been deleted');
+        return back();
+    }
+
+
+    public function attachRole(User $user){
+       
+
+        $user->roles()->attach(request('role'));
+
+        return back();
+    }
+
+    public function detachRole(User $user){
+       
+
+        $user->roles()->detach(request('role'));
+
         return back();
     }
 }
