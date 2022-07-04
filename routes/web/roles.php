@@ -13,3 +13,6 @@ Route::delete('/roles/{role}/destroy',[App\Http\Controllers\RoleController::clas
 Route::get('/roles/{role}/edit',[App\Http\Controllers\RoleController::class, 'edit'])->name('roles.edit');
 
 Route::patch('/roles/{role}/update',[App\Http\Controllers\RoleController::class, 'update'])->name('roles.update');
+
+Route::patch('roles/{role}/attach',[App\Http\Controllers\RoleController::class, 'attachPermission'])->name('permission.role.attach');
+Route::patch('roles/{role}/detach',[App\Http\Controllers\RoleController::class, 'detachPermission'])->name('permission.role.detach');

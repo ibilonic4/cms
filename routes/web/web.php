@@ -36,8 +36,7 @@ Route::middleware('role:admin', 'auth')->group(function(){
     Route::get('admin/users',[App\Http\Controllers\UserController::class, 'index'])->name('users.index');
     Route::delete('admin/users/{user}/destroy',[App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
 
-    Route::patch('users/{user}/attach',[App\Http\Controllers\UserController::class, 'attachRole'])->name('user.role.attach');
-    Route::patch('users/{user}/detach',[App\Http\Controllers\UserController::class, 'detachRole'])->name('user.role.detach');
+    
 
 });
 

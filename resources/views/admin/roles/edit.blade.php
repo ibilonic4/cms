@@ -49,7 +49,8 @@
                       <th>Id</th>
                       <th>Name</th>
                       <th>Slug</th>
-                      <th>Delete</th>
+                      <th>Attach</th>
+                      <th>Detach</th>
                       
               
                     </tr>
@@ -60,7 +61,8 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Slug</th>
-                        <th>Delete</th>
+                       <th>Attach</th>
+                       <th>Detach</th>
                        
                         
                     </tr>
@@ -80,15 +82,38 @@
                  <td> {{$permission->id}}</td>
                  <td> {{$permission->name}}</td>
                  <td> {{$permission->slug}}</td>
+
+
+          
                  <td>
-                    <form method="post" action="{{route('permissions.destroy', $permission->id)}}" enctype="multipart/form-data">
+                    <form action="{{route('permission.role.attach', $role)}}" method="post">
                         @csrf
-                        @method('DELETE')
-                        <button type = "submit" class="btn btn-danger">Delete</button>
-                       </form>
+                        @method('PATCH')
+     {{-- hidden input treba da prenesem role id kako bi ga mogao patcaht noramalno --}}
+                      <input type="hidden" name="permission" value="{{$permission->id}}">
+                     <button class="btn btn-primary"
+                     @if($role->permissions->contains($permission))
+                     disabled
 
+                     @endif
+                     >Attach </button>
+                    </form>
+                    </td>
+                <td>
+                    <form action="{{route('permission.role.detach', $role)}}" method="post">
+                        @csrf
+                        @method('PATCH')
+                      <input type="hidden" name="permission" value="{{$permission->id}}">
+                    <button class="btn btn-danger"
+                    @if(!$role->permissions->contains($permission))
+                    disabled
 
-                  </td>
+                    @endif
+                    
+                    
+                    >Detach </button>
+                </form>
+                </td>
 
                   </tr>
                   @endforeach
