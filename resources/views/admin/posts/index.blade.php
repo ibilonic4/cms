@@ -20,7 +20,7 @@
  <!-- DataTales Example -->
  <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+      <h6 class="m-0 font-weight-bold text-primary">Posts</h6>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -32,7 +32,8 @@
               <th>Image</th>
               <th>Created at</th>
               <th>Updated at</th>
-      
+              <th>Owner</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tfoot>
