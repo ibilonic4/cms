@@ -25,14 +25,14 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/post/{post}',[App\Http\Controllers\PostController::class, 'show'] )->name('blog.post');
 
 
-Route::middleware('auth')->group(function(){
+Route::middleware([ 'auth'])->group(function(){
 
     Route::get('/admin', [App\Http\Controllers\AdminsController::class, 'index'])->name('admin.index');
 
   
 });
 
-Route::middleware('role:admin', 'auth')->group(function(){
+Route::middleware(['role:admin', 'auth'])->group(function(){
     Route::get('admin/users',[App\Http\Controllers\UserController::class, 'index'])->name('users.index');
     Route::delete('admin/users/{user}/destroy',[App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
 

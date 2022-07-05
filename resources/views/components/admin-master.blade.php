@@ -34,7 +34,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Admin</div>
+        <div class="sidebar-brand-text mx-3">HOME</div>
       </a>
 
       <!-- Divider -->
@@ -56,8 +56,9 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-       @if(auth()->user()->userHasRole('Admin'))
+       
       <x-admin.sidebar.admin-sidebar-posts-links></x-admin-sidebar-posts-links>
+        @if(auth()->user()->userHasRole('Admin'))
       <x-admin.sidebar.admin-sidebar-users-links></x-admin-sidebar-users-links>
       <x-admin.sidebar.authorization-links> </x-admin.sidebar.authorization-links>
       @endif

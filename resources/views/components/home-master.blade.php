@@ -38,10 +38,14 @@
 
           @if(Auth::check())
           
+          @if(auth()->user()->userHasRole('admin'))
           <li class="nav-item">
             <a class="nav-link" href="{{route('admin.index')}}">Admin</a>
           </li>
-
+@endif
+<li class="nav-item">
+  <a class="nav-link" href="{{route('post.create')}}">Write a Post</a>
+</li>
          @else
 
          <li class="nav-item">

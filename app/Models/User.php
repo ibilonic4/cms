@@ -81,4 +81,18 @@ class User extends Authenticatable
         return asset('storage/' . $value);
         }
 
+
+
+
+
+        public function userHasPermission(... $permission_names){
+
+        
+            foreach($this->roles as $role){
+            foreach($role->permissions as $permission)
+            {foreach($permission_names as $permission_name){
+               if (Str::lower($permission_name) == Str::lower($permission->slug)){return true;} }}}
+            return false;
+           }
+
 }

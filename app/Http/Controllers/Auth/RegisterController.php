@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -65,11 +66,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'username' => $data['username'],
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => $data['password']
-        ]);
+        // return User::create([
+        //     'username' => $data['username'],
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => $data['password']
+        // ]);
+
+
+        $user = User::create($data);
+
+        
+        $role = Role::findOrFail(9);
+        
+        $user->roles()->attach($role);
+        
+        //event(new Registered($user));
+
+        
+
+        return redirect('/dashboard')->with('success', "Account successfully registered.");
     }
 }

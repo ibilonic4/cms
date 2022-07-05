@@ -30,7 +30,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        return $user->id === $post->user_id ?: $user->userHasRole('admin');;
     }
 
     /**
@@ -42,7 +42,7 @@ class PostPolicy
     public function create(User $user)
     {
         //ako je ulogirani user jednak useru spremljenom u bazi
-        return $user->is($user);
+        return $user->userHasRole('admin')  ?: $user->is($user) ;
     }
 
     /**
@@ -55,7 +55,7 @@ class PostPolicy
     public function update(User $user, Post $post)
     {
         //moze ga updateat ako je user autor posta
-        return $user->id === $post->user_id;
+        return $user->id === $post->user_id ?: $user->userHasRole('admin');
     }
 
     /**
@@ -67,7 +67,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        return $user->id === $post->user_id ?: $user->userHasRole('admin');;
     }
 
     /**
