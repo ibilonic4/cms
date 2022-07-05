@@ -46,6 +46,9 @@
 <li class="nav-item">
   <a class="nav-link" href="{{route('post.create')}}">Write a Post</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="{{route('post.index')}}">View your posts</a>
+</li>
          @else
 
          <li class="nav-item">
@@ -67,9 +70,16 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Contact</a>
           </li>
-        </ul>
+
+
+          
+          
+          </ul>
+
+        
       </div>
     </div>
+   
   </nav>
 
   <!-- Page Content -->
@@ -164,6 +174,14 @@
   <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
   <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
+
+  <!-- Core plugin JavaScript-->
+  <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="{{asset('js/sb-admin-2.js')}}"></script>
+
+  @yield('scripts')
 </body>
 
 </html>
