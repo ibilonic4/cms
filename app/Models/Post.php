@@ -31,5 +31,8 @@ class Post extends Model
 
 //     $this->attributes['post_image']= asset($value);
 // }
-        
+        public function comments(){
+
+            return $this->hasMany(PostComment::class);
+        }
 }

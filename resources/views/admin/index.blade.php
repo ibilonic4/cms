@@ -3,10 +3,13 @@
 @section('content')
 
 @if(auth()->user()->userHasRole('User','Admin'))
+<h1 class="h3 mb-4 text-gray-800">Admin</h1>
+
+@endif
+@if(!auth()->user()->userHasRole('User','Admin'))
 <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
 
 @endif
-
 
 
 @if(session()->has('success'))

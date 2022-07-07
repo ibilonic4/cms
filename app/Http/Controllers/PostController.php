@@ -17,9 +17,11 @@ class PostController extends Controller
   public function index()
   {
        //svi postovi logiranog usera
+      if(!auth()->user()->userHasRole('admin')){
+     $posts = auth()->user()->posts()->paginate(5);}
 
-     $posts = auth()->user()->posts()->paginate(5);
-     
+     elseif(auth()->user()->userHasRole('admin')){
+      $posts=Post::where('id','!=',null)->paginate(5);}
 
 
     return view('admin/posts/index', compact('posts'));
@@ -27,7 +29,8 @@ class PostController extends Controller
 
     public function show(Post $post){
 
-        return view('blog-post', compact('post'));
+        $comments = $post->comments();
+        return view('blog-post', compact('post','comments'));
     }
 
  public function create(){

@@ -8,10 +8,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Str;
+use \Illuminate\Auth\Passwords\CanResetPassword;
+use App\Notifications\PasswordReset;
+//use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends  Authenticatable   
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable,CanResetPassword ;
 
     /**
      * The attributes that are mass assignable.
@@ -68,10 +72,10 @@ class User extends Authenticatable
      return false;
     }
 
-    public function setPasswordAttribute($value){
-             $this->attributes['password'] = bcrypt($value);
+     public function setPasswordAttribute($value){
+              $this->attributes['password'] = bcrypt($value);
 
-    }
+     }
 
     public function getUserImageAttribute($value) {
         if (strpos($value, 'https://') !== FALSE || strpos($value, 'http://') !== FALSE) {
@@ -94,5 +98,19 @@ class User extends Authenticatable
                if (Str::lower($permission_name) == Str::lower($permission->slug)){return true;} }}}
             return false;
            }
+
+
+//override orginalne metode
+   public function sendPasswordResetNotification($token)
+   {
+     
+       $this->notify(new PasswordReset($token));
+  }
+
+   public function comments(){
+     return $this->hasMany(PostComment::class);
+   }
+
+   
 
 }

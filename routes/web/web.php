@@ -18,13 +18,17 @@ use Illuminate\Support\Facades\Auth;
 //     return view('welcome');
 // });
 
+
 Auth::routes();
+
+
+
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/post/{post}',[App\Http\Controllers\PostController::class, 'show'] )->name('blog.post');
 
-
+Route::post('/post/comment',[App\Http\Controllers\PostCommentController::class,'store'])->name('comment.store');
 Route::middleware([ 'auth'])->group(function(){
 
     Route::get('/admin', [App\Http\Controllers\AdminsController::class, 'index'])->name('admin.index');

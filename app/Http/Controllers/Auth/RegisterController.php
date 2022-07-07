@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Role;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Request;
 
 class RegisterController extends Controller
 {
@@ -74,17 +76,17 @@ class RegisterController extends Controller
         // ]);
 
 
-        $user = User::create($data);
+        $user =User::create($data);
 
         
         $role = Role::findOrFail(9);
         
         $user->roles()->attach($role);
         
-        //event(new Registered($user));
+        event(new Registered($user));
 
         
-
-        return redirect('/dashboard')->with('success', "Account successfully registered.");
+ return $user;
+        //return redirect('/dashboard')->with('success', "Account successfully registered.") ;
     }
 }

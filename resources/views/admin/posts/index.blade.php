@@ -55,7 +55,7 @@
                 <a href="{{route('post.edit', $post->id)}}">{{$post->title}}</a>
               </td>
               <td>
-                <img src="{{asset($post->getPostImageAttribute($post->post_image))}}" width="150" height="150">
+                <img src="{{asset($post->getPostImageAttribute($post->post_image))}}" width="150" height="150" onerror="this.style.display='none'">
             </td>
               <td>{{$post->created_at->diffForHumans()}}</td>
               <td>{{$post->updated_at->diffForHumans()}}</td>

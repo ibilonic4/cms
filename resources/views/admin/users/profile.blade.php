@@ -61,7 +61,7 @@
     </div>
     <div class="form-group">
         <label for="password-confirm">Confirm Password</label>
-        <input id="password-confirm" class="form-control" type="password" name="password-confirm" >
+        <input id="password-confirm" class="form-control" type="password" name="password_confirmation" >
         @error('password-confirm')
             <div class="alert alert-danger">{{$message}}</div>
         @enderror

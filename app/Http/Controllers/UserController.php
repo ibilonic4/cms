@@ -25,10 +25,10 @@ class UserController extends Controller
     public function update(User $user){
 
         $inputs = request()->validate([
-           // 'username' => ['required', 'string', 'max:255','unique:users','alpha_dash'],
+            'username' => ['required', 'string', 'max:255','unique:users,username,'.$user->id,'alpha_dash'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
-          //  'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8','confirmed'],
             'avatar'=>['file'],
         ]);
 
